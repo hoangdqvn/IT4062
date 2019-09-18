@@ -5,8 +5,8 @@
 #include "sllist.h"
 
 
-void menuM(int a){
-	printf("USER MANAGEMENT PROGRAMM\t\t\tloginSTT=%d\n",a);
+void menuM(){
+	printf("USER MANAGEMENT PROGRAMM\n");
 	printf("---------------------------------------------\n");
 	printf("\t1. Register\n");
 	printf("\t2. Sign in\n");
@@ -121,7 +121,7 @@ int main(){
 	if(readFile(list,"account.txt")){
 
 	do{
-		menuM(loginStt);
+		menuM();
 		scanf("%d",&n);
 		switch(n){
 			case 1:
@@ -134,6 +134,7 @@ int main(){
 			break;
 			case 3:
 			{
+				if (listLogin->root == NULL) loginStt = 0;
 				if(loginStt==0) printf("Account is not sign in!\n");
 				else{
 					searchUser(list);
@@ -141,10 +142,12 @@ int main(){
 			}
 			break;
 			case 4:
-			if(loginStt==0) printf("Account is not sign in!\n");
-			else{
-				loginStt=0;
-				logOut(list,listLogin);
+			{
+				if (listLogin->root == NULL) loginStt = 0;
+				if(loginStt==0) printf("Account is not sign in!\n");
+				else{
+					logOut(list,listLogin);
+				}
 			}
 			break;
 			default: break;
